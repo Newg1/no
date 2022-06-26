@@ -2687,9 +2687,11 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		scoreTxt.text = 'Score: ' + songScore + ' | Port by newbion | Misses: ' + songMisses + ' | Rating: ' + ratingName;
-		if(ratingName != '?')
-			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
+		if(ratingName == '?') {
+			scoreTxt.text = 'Score: ' + songScore + ' | Port by newbion | Misses: ' + songMisses + ' | Rating: ' + ratingName;
+		} else {
+			scoreTxt.text = 'Score: ' + songScore + ' | Port by newbion | Misses: ' + songMisses + ' | Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
+		}
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -3924,7 +3926,7 @@ class PlayState extends MusicBeatState
 							sortedNotesList.push(daNote);
 							//notesDatas.push(daNote.noteData);
 						}
-						canMiss = true;
+						canMiss = false;
 					}
 				});
 				sortedNotesList.sort((a, b) -> Std.int(a.strumTime - b.strumTime));
